@@ -7,8 +7,8 @@ public:
 	double getSum();
 	double getVat();
 	void setReceiptId(int receiptId);
-	void setSum(int sum);
-	void setVat(int vat);
+	void setSum(double sum);
+	void setVat(double vat);
 private:
 	int id;
 	double sum;

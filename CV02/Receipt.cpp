@@ -12,9 +12,9 @@ double Receipt::getVat() {
 void Receipt::setReceiptId(int receiptId) {
 	this->id = receiptId;
 }
-void Receipt::setSum(int sum) {
+void Receipt::setSum(double sum) {
 	this->sum = sum;
 }
-void Receipt::setVat(int vat) {
+void Receipt::setVat(double vat) {
 	this->vat = vat;
 }

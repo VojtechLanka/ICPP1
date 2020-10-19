@@ -26,6 +26,7 @@ Receipt& CashRegister::issueReceipt(double sum, double vat) {
 	CashRegister::receipts[CashRegister::numberOfIssuedReceipts++] = *receipt;
 	return *receipt;
 }
+
 Receipt& CashRegister::getReceiptFromId(int receiptId) {
 	for (int i = 0; i < CashRegister::numberOfIssuedReceipts; i++) {
 		if (CashRegister::receipts[i].getReceiptId() == receiptId) {
@@ -36,6 +37,7 @@ Receipt& CashRegister::getReceiptFromId(int receiptId) {
 	stringBuffer << "Unknow id: " << receiptId;
 	throw exception(stringBuffer.str().c_str());
 }
+
 double CashRegister::getSum() const {
 	double sum = 0.0;
 	for (int i = 0; i < CashRegister::numberOfIssuedReceipts; i++) {
@@ -43,6 +45,7 @@ double CashRegister::getSum() const {
 	}
 	return sum;
 }
+
 double CashRegister::getSumWithVat() const {
 	double sumWithVat = 0.0;
 	double sum;

@@ -10,9 +10,9 @@ private:
 	int numOfObjects = 0;
 	Object** insertObjectIntoArray(Object** oldObject, size_t oldSize, Object* newObject);
 	int* insertValueToPointerArray(int* oldArray, size_t oldSize, int newValue);
-	double distanceBetweenObjectAndPoint(double objX, double objY, double pointX, double pointY);
-	bool isBetween(double objX, double objY, double xmin, double xmax, double ymin, double ymax);
-	bool isBeetweenAngles(double umin, double umax, double objU);
+	static double distanceBetweenObjectAndPoint(double objX, double objY, double pointX, double pointY);
+	static bool isBetween(double objX, double objY, double xmin, double xmax, double ymin, double ymax);
+	static bool isBeetweenAngles(double umin, double umax, double objU);
 public:
 	Game(int arrayLength): objects(new Object* [arrayLength]) {};
 	~Game();

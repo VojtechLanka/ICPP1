@@ -99,16 +99,10 @@ double Game::distanceBetweenObjectAndPoint(double objX, double objY, double poin
 
 bool Game::isBetween(double objX, double objY, double xmin, double xmaxm, double ymin, double ymax)
 {
-	if ((xmin <= objX && objX <= xmaxm) && (ymin <= objY && objY <= ymax)) {
-		return true;
-	}
-	return false;
+	return (xmin <= objX && objX <= xmaxm) && (ymin <= objY && objY <= ymax);
 }
 
 bool Game::isBeetweenAngles(double umin, double umax, double objU)
 {
-	if (objU <= umax && objU >= umin) {
-		return true;
-	}
-	return false;
+	return objU <= umax && objU >= umin;
 }

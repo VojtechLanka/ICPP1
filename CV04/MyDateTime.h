@@ -8,6 +8,7 @@
 class MyDateTime : public IComparable {
 public:
 	MyDateTime(MyDate* date, MyTime* time) : date(date), time(time) {};
+	~MyDateTime();
 	int compareTo(IComparable* obj) const override;
 	std::string toString() const override;
 private:

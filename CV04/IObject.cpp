@@ -2,6 +2,3 @@
 
 IObject::IObject() {
 }
-
-IObject::~IObject() {
-}

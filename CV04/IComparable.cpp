@@ -2,6 +2,3 @@
 
 IComparable::IComparable() {
 }
-
-IComparable::~IComparable() {
-}

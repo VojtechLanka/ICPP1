@@ -6,6 +6,7 @@
 class MyTime : public IComparable {
 public:
 	MyTime(int hours, int minutes, int seconds) : hours(hours), minutes(minutes), seconds(seconds) {};
+	~MyTime();
 	int compareTo(IComparable* obj) const override;
 	std::string toString() const override;
 private:

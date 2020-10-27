@@ -1,8 +1,16 @@
 #include "MyDateTime.h"
 #include <iostream>
 
+MyDateTime::~MyDateTime() {
+	delete this;
+}
+
 int MyDateTime::compareTo(IComparable* obj) const {
-	MyDateTime* dateTime = (MyDateTime*)obj;
+	MyDateTime* dateTime = dynamic_cast<MyDateTime*>(obj);
+	if (dateTime == nullptr) {
+		throw std::exception("Passed pointer is not instance of MyDateTime");
+	}
+
 	int resultTime = this->time->compareTo(dateTime->time);
 	int resultDate = this->date->compareTo(dateTime->date);
 	

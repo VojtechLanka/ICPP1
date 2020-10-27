@@ -6,7 +6,7 @@
 class IObject {
 public:
 	IObject();
-	~IObject();
+	virtual ~IObject() {};
 	virtual std::string toString() const = 0;
 };
 

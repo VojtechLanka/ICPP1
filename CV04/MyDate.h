@@ -6,6 +6,7 @@
 class MyDate : public IComparable {
 public:
 	MyDate(int day, int month, int year) : day(day), month(month), year(year) {};
+	~MyDate();
 	int compareTo(IComparable* obj) const override;
 	std::string toString() const override;
 private:

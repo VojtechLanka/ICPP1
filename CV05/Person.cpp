@@ -3,9 +3,9 @@
 using namespace Entity;
 
 Person::Person() {
-	this->id = -1;
-	this->phone = "";
-	this->name = "";
+	id = -1;
+	phone = "";
+	name = "";
 }
 
 Person::Person(int id, std::string name, std::string phone) {

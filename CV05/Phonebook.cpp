@@ -3,30 +3,33 @@
 
 using namespace Model;
 Phonebook::Phonebook() {
-	first = NULL;
-	current = NULL;
+	first = nullptr;
+	current = nullptr;
 }
 
 Phonebook::~Phonebook() {
 	Node* current = first;
-	Node* next = first->next;
 	while (current != nullptr) {
+		Node* next = current->next;
 		delete current;
 		current = next;
-		next = current->next;
 	}
 }
 
-Node::Node(Entity::Person person) {
+Phonebook::Node::Node(Entity::Person person) {
 	this->data = person;
 	this->next = nullptr;
 }
 
 void Phonebook::addPerson(Entity::Person person) {
+	if (person.getId() == -1 || person.getPhone() == "" || person.getName() == "")
+	{
+		throw std::invalid_argument("Person is not fully initialized");
+	}
 	Node* tmp = new Node(person);
-	tmp->next = NULL;
+	tmp->next = nullptr;
 
-	if (first == NULL) {
+	if (first == nullptr) {
 		first = tmp;
 		current = tmp;
 	}

@@ -5,13 +5,6 @@
 #include "Person.h"
 
 namespace Model {
-	struct Node {
-		Node(Entity::Person data);
-		~Node() {};
-		Entity::Person data;
-		Node* next;
-	};
-
 	class Phonebook {
 	public:
 		Phonebook();
@@ -20,6 +13,13 @@ namespace Model {
 		std::string findPhoneNumber(std::string name) const;
 		std::string findPhoneNumber(int id) const;
 	private:
+		struct Node {
+			Node(Entity::Person data);
+			~Node() {};
+			Entity::Person data;
+			Node* next;
+		};
+
 		Node* first, * current;
 	};
 }

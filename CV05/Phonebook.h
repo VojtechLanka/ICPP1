@@ -7,7 +7,7 @@
 namespace Model {
 	struct Node {
 		Node(Entity::Person data);
-		virtual ~Node() {};
+		~Node() {};
 		Entity::Person data;
 		Node* next;
 	};

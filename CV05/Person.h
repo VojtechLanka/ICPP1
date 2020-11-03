@@ -8,7 +8,7 @@ namespace Entity {
 	public:
 		Person();
 		Person(int id, std::string name, std::string phone);
-		virtual ~Person() {};
+		~Person() {};
 		int getId() const;
 		std::string getName() const;
 		std::string getPhone() const;

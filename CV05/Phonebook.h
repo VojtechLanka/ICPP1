@@ -20,7 +20,7 @@ namespace Model {
 		std::string findPhoneNumber(std::string name) const;
 		std::string findPhoneNumber(int id) const;
 	private:
-		Model::Node* first, * current;
+		Node* first, * current;
 	};
 }
 

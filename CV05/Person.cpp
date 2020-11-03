@@ -15,13 +15,13 @@ Person::Person(int id, std::string name, std::string phone) {
 }
 
 int Person::getId() const {
-	return this->id;
+	return id;
 }
 
 std::string Person::getName() const {
-	return this->name;
+	return name;
 }
 
 std::string Person::getPhone() const {
-	return this->phone;
+	return phone;
 }

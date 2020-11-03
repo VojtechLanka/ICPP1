@@ -12,7 +12,7 @@ Phonebook::~Phonebook() {
 	Node* next = first->next;
 	while (current != nullptr) {
 		delete current;
-		current = next->next;
+		current = next;
 		next = current->next;
 	}
 }

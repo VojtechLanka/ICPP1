@@ -8,16 +8,16 @@
 
 using namespace std;
 
-void save(Person persons[]) {
-	ofstream txtFile{ "persons.txt" };
+void save(string filename, Person persons[]) {
+	ofstream txtFile{ filename };
 	for (int i = 0; i < 3; i++) {
 		txtFile << persons[i] << endl;
 	}
 	txtFile.close();
 }
 
-void load() {
-	ifstream txtFile{ "persons.txt" };
+void load(string filename) {
+	ifstream txtFile{ filename };
 	char newLine = '.';
 	int n = 0;
 	string text;
@@ -41,8 +41,8 @@ void load() {
 	delete[] persons;
 }
 
-void saveBin(Person persons[]) {
-	ofstream file{ "persons.dat", ios_base::out | ios_base::binary };
+void saveBin(string filename, Person persons[]) {
+	ofstream file{ filename, ios_base::out | ios_base::binary };
 
 	for (int i = 0; i < 3; i++) {
 		file.write((char*)&persons[i], sizeof Person);
@@ -50,8 +50,8 @@ void saveBin(Person persons[]) {
 	file.close();
 }
 
-void loadBin() {
-	ifstream file{ "persons.dat", ios_base::in | ios_base::binary };
+void loadBin(string filename) {
+	ifstream file{ filename, ios_base::in | ios_base::binary };
 	Person persons[3];
 
 	for (int i = 0; i < 3; i++) {
@@ -77,11 +77,11 @@ int main() {
 		{ "Erik", "Kana", address3, date3 },
 	};
 
-	save(persons);
-	load();
+	save("persons.txt", persons);
+	load("persons.txt");
 
-	saveBin(persons);
-	loadBin();
+	saveBin("persons.dat", persons);
+	loadBin("persons.dat");
 	system("pause");
 	return 0;
 }

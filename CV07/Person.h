@@ -10,7 +10,7 @@ public:
 	Person();
 	Person(std::string name, std::string surname, Address address, Date date);
 	~Person();
-	friend std::ostream& operator<<(std::ostream& os, Person& person);
+	friend std::ostream& operator<<(std::ostream& os, const Person& person);
 	friend std::istream& operator>>(std::istream& is, Person& person);
 private:
 	std::string name;

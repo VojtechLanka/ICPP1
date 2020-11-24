@@ -15,13 +15,10 @@ Date::Date(int day, int month, int year) {
 
 Date::~Date() {}
 
-std::ostream& operator<<(std::ostream& os, Date& date) {
+std::ostream& operator<<(std::ostream& os, const Date& date) {
 	return os << date.day << " " << date.month << " " << date.year;
 }
 
 std::istream& operator>>(std::istream& is, Date& date) {
-	is >> date.day;
-	is >> date.month;
-	is >> date.year;
-	return is;
+	return is >> date.day >> date.month >> date.year;
 }

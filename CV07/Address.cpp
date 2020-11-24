@@ -28,8 +28,5 @@ std::ostream& operator<<(std::ostream& os, const Address& address) {
 }
 
 std::istream& operator>>(std::istream& is, Address& address) {
-	is >> address.street;
-	is >> address.town;
-	is >> address.zipCode;
-	return is;
+	return is >> address.street >> address.town >> address.zipCode;
 }

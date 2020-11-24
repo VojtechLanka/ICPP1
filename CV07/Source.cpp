@@ -8,17 +8,9 @@
 
 using namespace std;
 
-void save(string filename, Person persons[]) {
-	ofstream txtFile{ filename };
-	for (int i = 0; i < 3; i++) {
-		txtFile << persons[i] << endl;
-	}
-	txtFile.close();
-}
-
-void load(string filename) {
+int getNumberOfItemsInFile(string filename) {
 	ifstream txtFile{ filename };
-	char newLine = '.';
+
 	int n = 0;
 	string text;
 
@@ -26,62 +18,82 @@ void load(string filename) {
 		getline(txtFile, text);
 		n++;
 	}
+	txtFile.close();
+
+	return n;
+}
+
+void save(string filename, Person persons[], int arrayLenght) {
+	ofstream txtFile{ filename };
+	for (int i = 0; i < arrayLenght; i++) {
+		txtFile << persons[i] << endl;
+	}
+	txtFile.close();
+}
+
+Person* load(string filename, int arrayLenght) {
+	ifstream txtFile{ filename };
+	int n = arrayLenght > 0 ? arrayLenght : getNumberOfItemsInFile(filename);
 
 	Person* persons = new Person[n];
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < arrayLenght; i++) {
 		txtFile >> persons[i];
 	}
 	txtFile.close();
-
-	for (int i = 0; i < 3; i++) {
-		cout << persons[i] << endl;
-	}
-
-	delete[] persons;
+	
+	return persons;
 }
 
-void saveBin(string filename, Person persons[]) {
+void saveBin(string filename, Person persons[], int arrayLenght) {
 	ofstream file{ filename, ios_base::out | ios_base::binary };
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < arrayLenght; i++) {
 		file.write((char*)&persons[i], sizeof Person);
 	}
 	file.close();
 }
 
-void loadBin(string filename) {
+Person* loadBin(string filename, int arrayLenght) {
 	ifstream file{ filename, ios_base::in | ios_base::binary };
-	Person persons[3];
+	Person* persons = new Person[arrayLenght];
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < arrayLenght; i++) {
 		file.read((char*)&persons[i], sizeof Person);
 	}
 	file.close();
 
-	for (int i = 0; i < 3; i++) {
-		cout << persons[i] << endl;
-	}
+	return persons;
 }
 
 int main() {
-	Address address1 = Address("Hajecka", "Zlonice", 27371);
-	Address address2 = Address("Halkova", "Mimon", 47124);
-	Address address3 = Address("Bedricha Smetany ", "Cesky Brod", 28201);
-	Date date1 = Date(10, 2, 2018);
-	Date date2 = Date(12, 7, 2015);
-	Date date3 = Date(1, 12, 2020);
-	Person persons[] = {
-		{ "Milan", "Dolezal", address1, date1 },
-		{ "Karel", "Vaculik", address2, date2 },
-		{ "Erik", "Kana", address3, date3 },
+	Person personsToSave[] = {
+		{ "Milan", "Dolezal", Address("Hajecka", "Zlonice", 27371), Date(10, 2, 2018) },
+		{ "Karel", "Vaculik", Address("Halkova", "Mimon", 47124), Date(12, 7, 2015) },
+		{ "Erik", "Kana", Address("Bedricha Smetany ", "Cesky Brod", 28201), Date(1, 12, 2020) },
 	};
 
-	save("persons.txt", persons);
-	load("persons.txt");
+	Person* personsTxt;
+	Person* personsDat;
 
-	saveBin("persons.dat", persons);
-	loadBin("persons.dat");
-	system("pause");
+	cout << "Saving persons.txt" << endl;
+	save("persons.txt", personsToSave, 3);
+
+	personsTxt = load("persons.txt", 3);
+	cout << "Loaded from persons.txt:" << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << personsTxt[i] << endl;
+	}
+
+	cout << endl << "-------------------------------" << endl << endl;
+
+	cout << "Saving persons.dat" << endl;
+	saveBin("persons.dat", personsToSave, 3);
+	personsDat = loadBin("persons.dat", 3);
+	cout << "Loaded from persons.dat:" << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << personsDat[i] << endl;
+	}
+
 	return 0;
 }

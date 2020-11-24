@@ -2,9 +2,9 @@
 #include "Date.h"
 
 Date::Date() {
-	this->day = 0;
-	this->month = 0;
-	this->year = 0;
+	day = 0;
+	month = 0;
+	year = 0;
 }
 
 Date::Date(int day, int month, int year) {

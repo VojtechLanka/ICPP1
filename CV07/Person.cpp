@@ -2,10 +2,10 @@
 #include "Person.h"
 
 Person::Person() {
-	this->name = "";
-	this->surname = "";
-	this->address = Address();
-	this->date = Date();
+	name = "";
+	surname = "";
+	address = Address();
+	date = Date();
 }
 
 Person::Person(std::string name, std::string surname, Address address, Date date) {

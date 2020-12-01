@@ -8,21 +8,6 @@
 
 using namespace std;
 
-int getNumberOfItemsInFile(string filename) {
-	ifstream txtFile{ filename };
-
-	int n = 0;
-	string text;
-
-	while (!txtFile.eof()) {
-		getline(txtFile, text);
-		n++;
-	}
-	txtFile.close();
-
-	return n;
-}
-
 void save(string filename, Person persons[], int arrayLenght) {
 	ofstream txtFile{ filename };
 	for (int i = 0; i < arrayLenght; i++) {
@@ -33,9 +18,12 @@ void save(string filename, Person persons[], int arrayLenght) {
 
 Person* load(string filename, int arrayLenght) {
 	ifstream txtFile{ filename };
-	int n = arrayLenght > 0 ? arrayLenght : getNumberOfItemsInFile(filename);
+	if (!txtFile.good())
+	{
+		throw ios_base::failure(string("Could not open file with name: ") + filename);
+	}
 
-	Person* persons = new Person[n];
+	Person* persons = new Person[arrayLenght];
 
 	for (int i = 0; i < arrayLenght; i++) {
 		txtFile >> persons[i];
@@ -56,6 +44,11 @@ void saveBin(string filename, Person persons[], int arrayLenght) {
 
 Person* loadBin(string filename, int arrayLenght) {
 	ifstream file{ filename, ios_base::in | ios_base::binary };
+	if (!file.good())
+	{
+		throw ios_base::failure(string("Could not open file with name: ") + filename);
+	}
+
 	Person* persons = new Person[arrayLenght];
 
 	for (int i = 0; i < arrayLenght; i++) {
@@ -76,24 +69,31 @@ int main() {
 	Person* personsTxt;
 	Person* personsDat;
 
-	cout << "Saving persons.txt" << endl;
-	save("persons.txt", personsToSave, 3);
+	try
+	{
+		cout << "Saving persons.txt" << endl;
+		save("persons.txt", personsToSave, 3);
 
-	personsTxt = load("persons.txt", 3);
-	cout << "Loaded from persons.txt:" << endl;
-	for (int i = 0; i < 3; i++) {
-		cout << personsTxt[i] << endl;
+		personsTxt = load("persons.txt", 3);
+		cout << "Loaded from persons.txt:" << endl;
+		for (int i = 0; i < 3; i++) {
+			cout << personsTxt[i] << endl;
+		}
+
+		cout << endl << "-------------------------------" << endl << endl;
+
+		cout << "Saving persons.dat" << endl;
+		saveBin("persons.dat", personsToSave, 3);
+		personsDat = loadBin("persons.dat", 3);
+		cout << "Loaded from persons.dat:" << endl;
+		for (int i = 0; i < 3; i++) {
+			cout << personsDat[i] << endl;
+		}
 	}
+	catch (const std::exception& exception)
+	{
+		cout << "Exception: " << exception.what() << endl;
 
-	cout << endl << "-------------------------------" << endl << endl;
-
-	cout << "Saving persons.dat" << endl;
-	saveBin("persons.dat", personsToSave, 3);
-	personsDat = loadBin("persons.dat", 3);
-	cout << "Loaded from persons.dat:" << endl;
-	for (int i = 0; i < 3; i++) {
-		cout << personsDat[i] << endl;
 	}
-
 	return 0;
 }
